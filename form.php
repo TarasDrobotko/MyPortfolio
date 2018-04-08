@@ -2,26 +2,45 @@
 require 'vendor/autoload.php';
 
 use Intervention\Image\ImageManager;
-
-echo get_cfg_var('upload_max_filesize');
-
+// array of allowable values of file
+$types = array('image/gif', 'image/png', 'image/jpeg');
+// max size file
+$size = 4000000;
 if(isset($_POST['submit'])) {
+if (!in_array($_FILES['image1']['type'], $types) OR !in_array($_FILES['image2']['type'], $types))
+die('This type don\'t allow!');
+
+if ($_FILES['image1']['size'] > $size OR $_FILES['image2']['size'] > $size)
+die('Too big size of file!');
 
 if(is_uploaded_file($_FILES['image1']['tmp_name'])) {
-    if(move_uploaded_file($_FILES['image1']['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/images/'.$_FILES['image1']['name'])) {
     
+    $image = $_FILES['image1']['tmp_name'];
+    $newloc = $_SERVER['DOCUMENT_ROOT'].'/images/'.$_FILES['image1']['name'];
+    
+    if(move_uploaded_file($image, $newloc)) {
                 $image1 = $_FILES['image1']['name'];
     }
-        else {echo 'Щось пішло не так!'; }
+        else {echo 'Something went wrong!'; }
+}
+else { 
+    echo 'Image 1 isn\'t uploaded!';
 }
 
 if(is_uploaded_file($_FILES['image2']['tmp_name'])) {
-    if(move_uploaded_file($_FILES['image2']['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/images/'.$_FILES['image2']['name'])) {
+    
+    $image = $_FILES['image2']['tmp_name'];
+    $newloc = $_SERVER['DOCUMENT_ROOT'].'/images/'.$_FILES['image2']['name'];
+    
+    if(move_uploaded_file($image, $newloc)) {
     $image2 = $_FILES['image2']['name'];
-      
     }
-        else {echo 'Щось пішло не так!'; }
+        else {echo 'Something went wrong!'; }
 }
+else { 
+    echo 'Image 2 isn\'t uploaded!';
+}
+
 if($image1 && $image2) {
 // create an image manager instance with favored driver
 $manager = new ImageManager(array('driver' => 'imagick'));
@@ -34,20 +53,6 @@ $logo = $manager->make('images/'.$image2)->resize(320, 240);
 $image->insert($logo, 'center')->save('images/changed_'.$image1);
 }
 }
-?>
-<!DOCTYPE HTML>
-<html>
- <head>
-  <title>Реалізація форми</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
- </head>
- <body>
-<h1>Реалізація форми, яка відправляє зображення на скрипт, що обробляє їх</h1>
-<form action="form.php" method="post" enctype="multipart/form-data">
-    <label for="image1">Зображення 1:</label> <input type="file" name="image1" value="" id="image1">
-    <label for="image2">Зображення 2:</label> <input type="file" name="image2" value="" id="image2">
-    <input type="submit"  name="submit" value="Відправити зображення">
-</form>
- </body>
-</html>
+
+
 
