@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Front label for stock info
-Plugin URI: https://github.com/TarasDrobotko/MyPortfolio/tree/master/front-label-stock-info
+Plugin URI: https://github.com/TarasDrobotko/MyPortfolio/tree/master/front-label-for-stock-info
 Description: user friendly front label for stock info
 Author: Drobotko Taras
 Author URI: http://m662449k.beget.tech
