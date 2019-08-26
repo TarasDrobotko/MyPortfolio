@@ -1,0 +1,74 @@
+ input.button-add {
+  background: #359542;
+  display: inline-block;
+  border-color: #32a36d #32a36d #32a36d;
+  box-shadow: 0 1px 0 #006799;
+  color: #fff;
+  text-decoration: none;
+  text-shadow: 0 -1px 1px #198327, 1px 0 1px #198327, 0 1px 1px #198327,
+    -1px 0 1px #43b87f;
+  line-height: 26px;
+  height: 28px;
+  margin: 15px 0 0 0;
+  padding: 0 10px 1px 30px;
+  cursor: pointer;
+  border-width: 1px;
+  border-style: solid;
+  -webkit-appearance: none;
+  border-radius: 3px;
+  white-space: nowrap;
+  box-sizing: border-box;
+  margin-left: 120px;
+  background-image: url('/wp-content/plugins/front-label-for-stock-info-2/img/plus-circle_icon.png');
+  background-repeat: no-repeat;
+  background-position: 4px 1px;
+}
+
+input.button-add:hover {
+  background: hsl(128, 37%, 45%);
+  background-image: url('/wp-content/plugins/front-label-for-stock-info-2/img/plus-circle_icon.png');
+  background-repeat: no-repeat;
+  background-position: 4px 1px;
+}
+
+input.button-del {
+    background: hsl(0, 87%, 56%);
+    display: inline-block;
+    border-color: #32a36d #32a36d #32a36d;
+    box-shadow: 0 1px 0 #006799;
+    color: #fff;
+    text-decoration: none;
+    text-shadow: 0 -1px 1px hsl(0, 80%, 51%), 1px 0 1px hsl(0, 80%, 51%), 0 1px 1px hsl(0, 80%, 51%),
+      -1px 0 1px #43b87f;
+    line-height: 26px;
+    height: 28px;
+    margin: 0;
+    padding: 0 10px 1px 30px;
+    cursor: pointer;
+    border-width: 1px;
+    border-style: solid;
+    -webkit-appearance: none;
+    border-radius: 3px;
+    white-space: nowrap;
+    box-sizing: border-box;
+    margin-left: 30px;
+    background-image: url('/wp-content/plugins/front-label-for-stock-info-2/img/icon_minus.png');
+    background-repeat: no-repeat;
+    background-position: 4px 1px;
+}
+
+input.button-del:hover {
+    background: hsl(0, 87%, 59%);
+    background-image: url('/wp-content/plugins/front-label-for-stock-info-2/img/icon_minus.png');
+    background-repeat: no-repeat;
+    background-position: 4px 1px;
+  }
+
+   .error input,
+    .error textarea {
+      border: 1px solid red;
+    }
+
+    .error {
+      color: red;
+    }
