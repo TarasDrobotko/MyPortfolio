@@ -112,7 +112,7 @@ if(MissingPostsIdsArr.length) {
     /*
      * add ul list with posts data
     */
-	elementWidget = document.querySelector('.sidebar-widget.widget_widget_your_posts_views_history');
+	elementWidget = document.querySelector('.widget_widget_your_posts_views_history');
 	
 	if(elementWidget !== null &&  checkIfPostDataExists() == true) {
 	     var ul = document.createElement('ul');
