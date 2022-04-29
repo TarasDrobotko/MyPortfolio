@@ -8,12 +8,15 @@ Author URI: https://drobotkot.s-host.net/
 
 */
 
-add_action('wp_enqueue_scripts','main_js_init');
+add_action('wp_enqueue_scripts','register_scripts');
 
-function main_js_init() {
-    wp_enqueue_script( 'main-js', plugins_url( '/js/main.js', __FILE__ ));
+function register_scripts() {
+    wp_enqueue_script( 'main-js', plugins_url( '/assets/js/main.js', __FILE__ ));
     wp_localize_script( 'main-js', 'my_ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
+    
+    wp_enqueue_style('plugin-default', plugins_url( '/assets/css/style.css', __FILE__ ));
 } 
+
 
 // added the widget
 add_action('widgets_init', 'ursh_register_widgets');
@@ -36,6 +39,16 @@ class Posts_Views_History_Widget extends WP_Widget {
         $title = apply_filters('widget_title', empty($instance['posts-views-history-title']) ? __('Popular Posts') : $instance['posts-views-history-title']);
         $count = (int) (empty($instance['posts-views-history-number']) ? 5 : $instance['posts-views-history-number']);
         
+        // get data for js
+        
+        // check if it is post page
+        if(is_single()) {
+            $is_post_page = true;
+            $is_post_page = json_encode($is_post_page);
+        } else {
+            $is_post_page = false;
+            $is_post_page = json_encode($is_post_page);
+        }
           // get  all posts ids
          $posts_ids = get_posts(array(
     'fields'          => 'ids', // Only get post IDs
@@ -50,6 +63,7 @@ class Posts_Views_History_Widget extends WP_Widget {
    var count = '<?=$count?>';
     // get  all posts ids
    var postsIds = '<?=$posts_ids?>';
+   var isPostPage = '<?=$is_post_page?>';
 </script>
 <?php
             echo $before_widget;
