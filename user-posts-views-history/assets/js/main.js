@@ -2,14 +2,14 @@ window.onload = function() {
     /*
      * get post data
     */
-    var postTitleElem = document.querySelector('h1');
+   let postTitleElem = document.querySelector('h1');
     if(postTitleElem !== null) {
-  var postTitle = document.querySelector('h1').textContent;
+      postTitle = document.querySelector('h1').textContent;
     }
     
-    var postDate = new Date().toJSON();
+    let postDate = new Date().toJSON();
 
-    var url = window.location.href.replace(/\/$/, '');
+    let url = window.location.href.replace(/\/$/, '');
 
  /*
   * check if post data exists
@@ -61,32 +61,9 @@ for (let key of Object.keys(window.localStorage)) {
      return localStoragePostsKeysEnds;
 }
 
-/* 
-* delete item in localStorage if such post id does not exist 
+/*
+ * jquery ajax - set postsIds and postId variables on success 
 */
-localStoragePostsKeysEndsArr = getLocalStoragePostsKeysEnds();
-let postsIdsArr = [];
-
-if(typeof postsIds !== 'undefined') {
-postsIdsArr = JSON.parse(postsIds);
-var MissingPostsIdsArr = localStoragePostsKeysEndsArr.filter(i => !postsIdsArr.includes(i));
-
-if(MissingPostsIdsArr.length) {
-    MissingPostsIdsArr.forEach(function(item) {
-        
-    localStorage.removeItem('postData_'+item);
-    });
-}
-}
-    
-    /*
-     * save post data in localstorage
-    */
-    if(typeof isPostPage !== 'undefined') {
-            if (JSON.parse(isPostPage) == true && window.location.href.indexOf(window.location.origin+'/wp-admin') == -1)  {
-                
-          
-          var localStoragePostKey;
                  jQuery.ajax({
     type: "post",
     dataType: "json",
@@ -97,10 +74,41 @@ if(MissingPostsIdsArr.length) {
       postUrl: url
     },
     action: 'myaction',
-    success: function(postId){
-        localStoragePostKey = 'postData_'+ postId;
+    success: function(json){
+        if( json.success ) {
+				postsIds = json.data.postsIds;
+				if (json.data.postId != 0) {
+				postId = json.data.postId;
+                }
+        }
     }
 });
+
+/* 
+ * delete item in localStorage if such post id does not exist 
+*/
+if(typeof postsIds !== 'undefined') {
+localStoragePostsKeysEndsArr = getLocalStoragePostsKeysEnds();
+let postsIdsArr = [];
+ 
+postsIdsArr = postsIds;
+let MissingPostsIdsArr = localStoragePostsKeysEndsArr.filter(i => !postsIdsArr.includes(i));
+
+if(MissingPostsIdsArr.length) {
+    MissingPostsIdsArr.forEach(function(item) {
+        
+    localStorage.removeItem('postData_'+item);
+    });
+}
+}
+
+    /*
+     * save post data in localstorage
+    */
+   if(typeof isPostPage !== 'undefined') {
+            if (JSON.parse(isPostPage) == true && window.location.href.indexOf(window.location.origin+'/wp-admin') == -1)  {
+          
+       let localStoragePostKey = 'postData_'+ postId;
 
         const postData = {};
                 postData.postAddressUnique = url;
@@ -109,7 +117,7 @@ if(MissingPostsIdsArr.length) {
                 
                  localStorage.setItem(localStoragePostKey, JSON.stringify(postData));
             }
-    }
+}
              
     /*
      * add ul list with posts data
@@ -117,7 +125,7 @@ if(MissingPostsIdsArr.length) {
 	elementWidget = document.querySelector('.widget_widget_your_posts_views_history');
 	
 	if(elementWidget !== null &&  checkIfPostDataExists() == true && typeof count !== 'undefined') {
-	     var ul = document.createElement('ul');
+	     let ul = document.createElement('ul');
 	   elementWidget.appendChild(ul).classList.add('posts-views-history-list');
 	    elementUl = document.querySelector('.posts-views-history-list');
 
@@ -132,7 +140,7 @@ if(MissingPostsIdsArr.length) {
 	    titleWidgetElArr = titleWidgetEl.split(' ');
 	     titleWidgetElArr.forEach(function(item) {
 	         if(item.startsWith('class=')) {
-	             titleWidgetClass = item;
+	            let titleWidgetClass = item;
 	             let titleWidgetClassArr = titleWidgetClass.split('=');
 	             titleWidgetClass = titleWidgetClassArr[1].replace(/["']/g,'');
 	             titleElem.classList.add(titleWidgetClass);
@@ -169,4 +177,4 @@ if(MissingPostsIdsArr.length) {
     elementUl.innerHTML = html.join('');
 	}
 	
-}
+};

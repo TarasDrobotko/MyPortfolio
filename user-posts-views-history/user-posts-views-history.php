@@ -38,7 +38,6 @@ class Posts_Views_History_Widget extends WP_Widget {
         extract($args);
         $title = apply_filters('widget_title', empty($instance['posts-views-history-title']) ? __('Popular Posts') : $instance['posts-views-history-title']);
         $count = (int) (empty($instance['posts-views-history-number']) ? 5 : $instance['posts-views-history-number']);
-        
         // get data for js
         
         // check if it is post page
@@ -49,21 +48,13 @@ class Posts_Views_History_Widget extends WP_Widget {
             $is_post_page = false;
             $is_post_page = json_encode($is_post_page);
         }
-          // get  all posts ids
-         $posts_ids = get_posts(array(
-    'fields'          => 'ids', // Only get post IDs
-    'posts_per_page'  => -1
-));
-
- $posts_ids = json_encode($posts_ids);
         ?>
         
         <script type="text/javascript">
     // get posts count 
    var count = '<?=$count?>';
-    // get  all posts ids
-   var postsIds = '<?=$posts_ids?>';
-   var isPostPage = '<?=$is_post_page?>';
+
+   var isPostPage = '<?=$is_post_page?>'; 
 </script>
 <?php
             echo $before_widget;
@@ -106,12 +97,20 @@ class Posts_Views_History_Widget extends WP_Widget {
 add_action( "wp_ajax_postaction", "ursh_wp_ajax_function" );
 add_action( "wp_ajax_nopriv_postaction", "ursh_wp_ajax_function" );
 function ursh_wp_ajax_function(){
-  //DO whatever you want with data posted
-  //To send back a response you have to echo the result!
- $postUrl = $_POST['postUrl']; 
-$postId = url_to_postid($postUrl);
+  // get post id by post url
+  $postUrl = $_POST['postUrl']; 
+  $postId = url_to_postid($postUrl);
 
-echo $postId;
- 
-  wp_die(); // ajax call must die to avoid trailing 0 in your response
+          // get  all posts ids
+         $posts_ids = get_posts(array(
+    'fields'          => 'ids', // Only get post IDs
+    'posts_per_page'  => -1
+));
+
+$data = array(
+	'postsIds'   =>  $posts_ids,
+	'postId' =>  $postId
+);
+
+wp_send_json_success( $data );
 }
