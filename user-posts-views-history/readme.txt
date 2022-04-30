@@ -16,7 +16,7 @@ This plugin added the widget to show user's recent posts views history.
 
 == Installation ==
 = From your WordPress dashboard =
-*  Download the plugin archive from https://github.com/TarasDrobotko/MyPortfolio/edit/master/user-posts-views-history/ (use https://download-directory.github.io/ for download user-posts-views-history directory')
+*  Download the plugin archive from https://github.com/TarasDrobotko/MyPortfolio/master/user-posts-views-history/ (use https://download-directory.github.io/ for download user-posts-views-history directory')
 *  Visit 'Plugins > Add New'
 *  Choose 'Upload Plugin'
 *  Search for 'User Recent Search History'
