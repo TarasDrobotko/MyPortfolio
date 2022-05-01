@@ -77,7 +77,7 @@ for (let key of Object.keys(window.localStorage)) {
     success: function(json){
         if( json.success ) {
 				postsIds = json.data.postsIds;
-				if (json.data.postId != 0) {
+				if (json.data.postId != 0 && typeof json.data.postId == 'number') {
 				postId = json.data.postId;
                 }
         }
