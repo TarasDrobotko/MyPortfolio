@@ -105,7 +105,7 @@ if(MissingPostsIdsArr.length) {
     /*
      * save post data in localstorage
     */
-   if(typeof isPostPage !== 'undefined') {
+   if(typeof isPostPage !== 'undefined' && typeof postId !== 'undefined') {
             if (JSON.parse(isPostPage) == true && window.location.href.indexOf(window.location.origin+'/wp-admin') == -1)  {
           
        let localStoragePostKey = 'postData_'+ postId;
