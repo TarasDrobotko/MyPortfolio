@@ -52,7 +52,7 @@ for (let key of Object.keys(window.localStorage)) {
 
     if(key.startsWith('postData_')) { 
       keyArr = key.split('_');
-      postKeyEnd = parseInt(keyArr[1]);
+      postKeyEnd = keyArr[1];
          localStoragePostsKeysEnds.push(postKeyEnd);
          
     }
@@ -92,11 +92,11 @@ localStoragePostsKeysEndsArr = getLocalStoragePostsKeysEnds();
 let postsIdsArr = [];
  
 postsIdsArr = postsIds;
-let MissingPostsIdsArr = localStoragePostsKeysEndsArr.filter(i => !postsIdsArr.includes(i));
+let MissingPostsIdsArr = localStoragePostsKeysEndsArr.filter(i => !postsIdsArr.includes(parseInt(i)));
 
 if(MissingPostsIdsArr.length) {
     MissingPostsIdsArr.forEach(function(item) {
-        
+     
     localStorage.removeItem('postData_'+item);
     });
 }
@@ -108,8 +108,7 @@ if(MissingPostsIdsArr.length) {
    if(typeof isPostPage !== 'undefined' && typeof postId !== 'undefined') {
             if (JSON.parse(isPostPage) == true && window.location.href.indexOf(window.location.origin+'/wp-admin') == -1)  {
           
-       let localStoragePostKey = 'postData_'+ postId;
-
+       let localStoragePostKey = 'postData_'+ JSON.stringify(postId);
         const postData = {};
                 postData.postAddressUnique = url;
                 postData.postTitleUnique = postTitle;
