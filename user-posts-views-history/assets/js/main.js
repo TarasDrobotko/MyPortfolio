@@ -92,7 +92,11 @@ localStoragePostsKeysEndsArr = getLocalStoragePostsKeysEnds();
 let postsIdsArr = [];
  
 postsIdsArr = postsIds;
-let MissingPostsIdsArr = localStoragePostsKeysEndsArr.filter(i => !postsIdsArr.includes(parseInt(i)));
+let MissingPostsIdsArr = localStoragePostsKeysEndsArr.filter((i) => {
+     i = parseInt(i);
+    !postsIdsArr.includes(i);
+    });
+
 
 if(MissingPostsIdsArr.length) {
     MissingPostsIdsArr.forEach(function(item) {
