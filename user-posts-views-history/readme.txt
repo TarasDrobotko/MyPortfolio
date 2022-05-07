@@ -11,7 +11,7 @@ This plugin is to show user's recent posts views history.
 == Description ==
 The plugin simply displays the recent posts views history (posts titles and dates of posts views). Posts data is stored in localStorage.
 
-This plugin added the widget to show user's recent posts views history.
+This plugin added the widget "Recent browsing history" to show user's recent posts views history.
 
 
 == Installation ==
