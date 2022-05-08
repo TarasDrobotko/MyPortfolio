@@ -1,7 +1,8 @@
 <?php
 /*
 Plugin Name: User Posts Views History
-Description: Keeps track of logged In User's posts views history and also anonymous user's posts views history.
+Plugin URI: https://drobotkot.s-host.net/plaginy/plagin-user-posts-views-history/
+Description: The plugin displays the recent posts views history of the user (posts titles and dates of posts views). Posts data is stored in localStorage.
 Version: 1.0
 Author: Drobotko Taras
 Author URI: https://drobotkot.s-host.net/
@@ -29,7 +30,7 @@ class Posts_Views_History_Widget extends WP_Widget {
     function __construct() {
 		parent::__construct(
 			'widget_your_posts_views_history',
-			__('Recent browsing history', 'theme1'),
+			__('User Posts Views History', 'theme1'),
 			array( 'description' => __('Displays the recent browsing history of User', 'theme1'))
 		);
 	}
