@@ -5,6 +5,7 @@ Plugin URI: https://drobotkot.s-host.net/plaginy/plagin-user-posts-views-history
 Description: The plugin displays the recent posts views history of the user (posts titles and dates of posts views). Posts data is stored in localStorage.
 Version: 1.0
 Text Domain: user-posts-views-history
+Domain Path: /languages
 Author: Drobotko Taras
 Author URI: https://drobotkot.s-host.net/
 */
