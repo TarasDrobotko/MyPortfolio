@@ -20,6 +20,13 @@ function register_scripts()
     wp_enqueue_style('plugin-default', plugins_url('/assets/css/style.css', __FILE__));
 }
 
+// translation file connection
+add_action('plugins_loaded', 'myplugin_init');
+function myplugin_init()
+{
+    load_plugin_textdomain('user-posts-views-history', false, dirname(plugin_basename(__FILE__)) . '/languages/');
+}
+
 // add the widget
 add_action('widgets_init', 'ursh_register_widgets');
 
